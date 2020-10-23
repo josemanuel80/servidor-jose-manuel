@@ -1,4 +1,5 @@
 import { promises as fs } from 'fs';
+import { v4 as uuidv4 } from 'uuid';
 
 const getFilms = async () => {
   const filmsList = await fs.readFile('./data/films.json');
@@ -8,14 +9,11 @@ const getFilms = async () => {
 export const addFilmResource = async (data) => {
   const filmsFile = await fs.readFile('./data/films.json');
   const { films } = JSON.parse(filmsFile);
-  console.log('resource');
-  // const film={data};
-  films.push(data);
-  console.log('films');
+  const film = { ...data, id: uuidv4() };
 
+  films.push(film);
   await fs.writeFile('./data/films.json', JSON.stringify({ films }));
-  console.log(filmsFile);
-  return filmsFile;
+  return film;
 };
 
 export default getFilms;

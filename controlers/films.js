@@ -1,5 +1,5 @@
 import getFilms from '../models/films.js';
-import addFilmResource from '../models/films.js';
+import { addFilmResource } from '../models/films.js';
 
 export const listFilms = async (request, response) => {
   console.log('list');
@@ -13,7 +13,7 @@ export const addFilm = async (request, response) => {
   const { body } = request;
 
   const newFilm = await addFilmResource(body);
-  console.log(newFilm);
+  // console.log(newFilm);
   response.send(newFilm);
 };
 
